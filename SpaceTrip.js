@@ -6,14 +6,14 @@ function getRandomInt(min, max) {
 var SpaceTrip = function (particleNumber, particleLink, minSpeed, maxSpeed, minSize, maxSize) {
     var width = window.screen.width;
     var height = window.screen.height;
-    var background = document.createElement("canvas");
-    var ctx = background.getContext("2d");
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext("2d");
     var particles = [];
 
-    background.style.width = width;
-    background.style.height = height;
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
 
-    document.body.appendChild(background);
+    document.body.appendChild(canvas);
 
     for (var i = 0; i < particleNumber; i++) {
         var size = getRandomInt(minSize, maxSize);
@@ -24,24 +24,21 @@ var SpaceTrip = function (particleNumber, particleLink, minSpeed, maxSpeed, minS
         star.speed = speed;
         star.style.width = size + "px";
         star.style.height = "auto";
-        stars.push(star);
+        particles.push(star);
     }
 
     this.draw = function () {
+        var particle = new Image();
+        particle.src = "star.png";
         var time = new Date();
 
-        ctx.clearRect(0, 0, width, height);
-        ctx.globalCompositeOperation = 'destination-over';
-        ctx.fillStyle = 'rgba(7,7,7,7.4)';
-        ctx.strokeStyle = 'rgba(0,1,255,0.4)';
-        ctx.translate(300, 300);
-        ctx.drawImage(particles[0], -12, -12);
-        ctx.translate(0, 28.5);
+        // ctx.clearRect(0, 0, width, height);
 
-        ctx.fillRect(0, 0, 300, 200);
+        ctx.fillRect(0, 0, 500, 500);
         // ctx.restore();
         // ctx.restore();
-        ctx.drawImage(sun, 0, 0, 300, 300);
+        ctx.moveTo(5, 6);
+        ctx.drawImage(particle, 0, 0, 100, 100);
         // window.requestAnimationFrame(draw);
 
     };
